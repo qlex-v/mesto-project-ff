@@ -20,3 +20,28 @@
     line-height: 15px;
   }
 }
+
+.popup__input_error {
+  border-bottom: 1px solid red;
+}
+
+.popup__text-error {
+  visibility: hidden;
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  z-index: 1;
+  color: red;
+  font-size: 12px;
+  line-height: 14.52px;
+}
+
+.popup__text-error_active {
+  visibility: visible;
+}
+
+.popup__field {
+  display: block;
+  position: relative;
+  margin-block-end: 13px;
+}
