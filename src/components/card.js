@@ -1,5 +1,3 @@
-import { removeCardApi, putLikeApi, deleteLikeApi } from "./api.js";
-
 // Функция добавления карточки
 export const addCard = (cardDetails, removeCard, isLikeCard, displayPopupImage, cardTemplate, profileId) => {
   const card = cardTemplate.querySelector('.places__item').cloneNode(true);
@@ -36,30 +34,4 @@ export const addCard = (cardDetails, removeCard, isLikeCard, displayPopupImage, 
   return card;
 }
 // Функция удаления карточки
-export const removeCard = (event) => {
-  const listItem = event.target.closest('.card');
-  removeCardApi(listItem.id);
-  listItem.remove();
-}
-
-// Функция добавления/удаления лайка
-export const isLikeCard = (event) => {
-  const card = event.target.closest('.card');
-  const cardLikeCounter = card.querySelector('.card__like-counter');
-  const cardId = card.id;
-  if (event.target.classList.contains('card__like-button_is-active')) {
-    deleteLikeApi(cardId)
-    .then((data) => {
-      cardLikeCounter.textContent = data.likes.length
-    });
-  }
-  else {
-    putLikeApi(cardId)    
-    .then((data) => {
-      cardLikeCounter.textContent = data.likes.length
-    });
-
-  }
-  event.target.classList.toggle('card__like-button_is-active');
-}
 
