@@ -1,3 +1,4 @@
+// конфиг
 const config = {
   baseUrl: 'https://mesto.nomoreparties.co/v1/wff-cohort-17/',
   headers: {
@@ -5,7 +6,7 @@ const config = {
     'Content-Type': 'application/json'
   }
 }
-
+// получение пользователя
 export const getUserApi = () => {
   return fetch(`${config.baseUrl}users/me`, {
     method: 'GET',
@@ -19,7 +20,7 @@ export const getUserApi = () => {
     })
     .catch(err => console.log(err));
 }
-
+// получение карточек
 export const getCardsApi = () => {
   return fetch(`${config.baseUrl}cards`, {
     method: 'GET',
@@ -33,7 +34,7 @@ export const getCardsApi = () => {
     })
     .catch(err => console.log(err));
 }
-
+// изменение профиля
 export const editProfileApi = (name, about) => {
   return fetch(`${config.baseUrl}users/me`, {
     method: 'PATCH',
@@ -51,7 +52,7 @@ export const editProfileApi = (name, about) => {
     })
     .catch(err => console.log(err));
 }
-
+// добавление карточки
 export const addCardApi = (name, link) => {
   return fetch(`${config.baseUrl}cards`, {
     method: 'POST',
@@ -69,7 +70,7 @@ export const addCardApi = (name, link) => {
     })
     .catch(err => console.log(err));
 }
-
+// удаление карточки
 export const removeCardApi = (cardId) => {
   return fetch(`${config.baseUrl}cards/${cardId}`, {
     method: 'DELETE',
@@ -83,7 +84,7 @@ export const removeCardApi = (cardId) => {
     })
     .catch(err => console.log(err));
 }
-
+// добавление лайка
 export const putLikeApi = (cardId) => {
   return fetch(`${config.baseUrl}cards/likes/${cardId}`, {
     method: 'PUT',
@@ -97,7 +98,7 @@ export const putLikeApi = (cardId) => {
     })
     .catch(err => console.log(err));
 }
-
+// удаление лайка
 export const deleteLikeApi = (cardId) => {
   return fetch(`${config.baseUrl}cards/likes/${cardId}`, {
     method: 'DELETE',
@@ -111,7 +112,7 @@ export const deleteLikeApi = (cardId) => {
     })
     .catch(err => console.log(err));
 }
-
+// изменение аватара
 export const editAvatarApi = (avatar) => {
   return fetch(`${config.baseUrl}users/me/avatar`, {
     method: 'PATCH',
