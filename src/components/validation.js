@@ -1,19 +1,19 @@
 // функция показа ошибки
-const showInputError = (formElement, inputElement, errorMessage) => {
+const showInputError = (formElement, inputElement, errorMessage, options) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('popup__input_error');
+  inputElement.classList.add(options.inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add('popup__text-error_active');
+  errorElement.classList.add(options.errorClass);
 };
 // функция скрытия ошибки
-const hideInputError = (formElement, inputElement) => {
+const hideInputError = (formElement, inputElement, options) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove('popup__input_error');
-  errorElement.classList.remove('popup__text-error_active');
+  inputElement.classList.remove(options.inputErrorClass);
+  errorElement.classList.remove(options.errorClass);
   errorElement.textContent = '';
 }
 // проверка валидности поля
-function isValid(formElement, inputElement) {
+function isValid(formElement, inputElement, options) {
   if(inputElement.validity.patternMismatch) {
     inputElement.setCustomValidity(inputElement.dataset.errorMessage);
   } else {
@@ -21,20 +21,20 @@ function isValid(formElement, inputElement) {
   }
 
   if(!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, inputElement.validationMessage, options);
     
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, options);
   }
 }
 // функция добавления слушателя ввода в форму
-const setEventListners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  const btnElement = formElement.querySelector('.popup__button');
+const setEventListners = (formElement, options) => {
+  const inputList = Array.from(formElement.querySelectorAll(options.inputSelector));
+  const btnElement = formElement.querySelector(options.submitButtonSelector);
   toggleButtonState(inputList, btnElement);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      isValid(formElement, inputElement);
+      isValid(formElement, inputElement, options);
       toggleButtonState(inputList, btnElement);
   })
 }
@@ -54,9 +54,17 @@ export const toggleButtonState = (inputList, buttonElement) => {
   }
 };
 // функция включения валидации всех форм
-export const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll('.popup__form'));
+export const enableValidation = (options) => {
+  const formList = Array.from(document.querySelectorAll(options.formSelector));
   formList.forEach((formElement) => {
-    setEventListners(formElement);
+    setEventListners(formElement, options);
   })
 };
+
+export function clearValidation(formElement, options) {
+  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+  inputList.forEach((inputElement) => {
+    hideInputError(formElement, inputElement, options);
+  })
+  toggleButtonState(inputList, formElement.querySelector(options.submitButtonSelector));
+}

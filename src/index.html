@@ -13,6 +13,7 @@
         <header class="header page__section">
             <img src="<%=require('./images/logo.svg')%>" alt="Логотип проекта масто" class="logo header__logo">
         </header>
+        <div class="spinner"><i></i></div>
         <main class="content">
             <section class="profile page__section">
                 <div class="profile__image" style="background-image: url('<%=require('./images/avatar.jpg')%>');"></div>
@@ -100,7 +101,7 @@
     </div>
         <template id="card-template">
             <li class="places__item card">
-                <img class="card__image" src="" alt="" />
+                <img class="card__image" src="" alt="" onerror="this.onerror=null;this.src='https://placehold.jp/150x150.png';"/>
                 <button type="button" class="card__delete-button"></button>
                 <div class="card__description">
                     <h2 class="card__title">
@@ -112,6 +113,7 @@
                 </div>
             </li>
         </template>
+        
 </body>
 
 </html>
